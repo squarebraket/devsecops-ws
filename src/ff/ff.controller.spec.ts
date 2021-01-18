@@ -14,19 +14,13 @@ describe('Frequent Flyer Controller Tests', () => {
     ffController = ff.get<FrequentFlyerController>(FrequentFlyerController);
   });
 
-  it('Should Return acknowledge', () => {
-    expect(ffController.findAll()).toBe(
-      'This will return Frequent Flyer Info.',
-    );
+  it('Should add user to Frequent Flyer Club', () => {
+    const newMember = { lastName: 'Smith', firstName: 'Jill' };
+    const res = ffController.joinClub(newMember);
+
+    expect(res.code).toBe('200');
+    expect(res.message).toContain('Success');
   });
 
-  it('Should add user to Frequent Flyer Club', () => {
-    const newMember = {
-      lastName: 'Smith',
-      firstName: 'Jill',
-    };
-    expect(ffController.joinClub(newMember)).toBe(
-      'Success! Your status is Bronze',
-    );
-  });
+  it('Should retrieve Club Member', () => {});
 });
