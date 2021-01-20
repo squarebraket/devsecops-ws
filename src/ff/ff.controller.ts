@@ -9,14 +9,12 @@ export class FrequentFlyerController {
 
   @Get(':id')
   findClubMember(@Param() params): ResponseDto {
-    console.log(`Member Id Requested = ${params.id}`);
-
     const m = this.ffService.getMemberDetails(params.id);
 
     if (m.status !== '') {
       const res = new ResponseDto(
-        '200',
-        `Found club member with id =${params.id}`,
+        200,
+        `Success! Found club member with id =${params.id}`,
         m,
       );
 
@@ -30,10 +28,37 @@ export class FrequentFlyerController {
     let res;
 
     if (s < 0) {
-      res = new ResponseDto('400', 'Error');
+      res = new ResponseDto(400, 'Error');
     } else {
-      res = new ResponseDto('200', `Success! Your member ID is ${s}`);
+      res = new ResponseDto(200, `Success! Your member ID is ${s}`);
     }
     return res;
+  }
+
+  @Get(':id/points/:pts')
+  addPointsToAccount(@Param() params): ResponseDto {
+
+    try {
+      const res = this.ffService.addPointsToAccount(params.id, params.pts);
+      return new ResponseDto(200, 'Success! Points were added to account');
+    } catch (e) {
+      console.log(
+        `There was an error while adding points to account with id ${params.id}`,
+      );
+      return new ResponseDto(400, 'Error, something went wrong');
+    }
+  }
+
+  @Get(':id/status/:status')
+  updateAccountStatus(@Param() params): ResponseDto {
+    try {
+      const res = this.ffService.setMemberStatus(params.id, params.status);
+      return new ResponseDto(200, 'Success! Account status updated');
+    } catch (e) {
+      console.log(
+        `There was an error while adding points to account with id ${params.id}`,
+      );
+      return new ResponseDto(400, 'Error, something went wrong');
+    }
   }
 }

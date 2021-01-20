@@ -14,7 +14,7 @@ The language of choice for this project is `Typescript`. The following framework
 - Jest: A test framework for unit-test and e2e tests
 - Cucumber: a tool to create and run BBD tests
 
-#### Code Structure
+##### Code Structure
 
 - Source code and unit-tests are located in the `src` folder
 - e2e tests are stored in the `test` folder
@@ -28,7 +28,7 @@ The language of choice for this project is `Typescript`. The following framework
 >
 > In this chapter, and throughout the rest of the book, we’ll use examples from this project to illustrate the concepts and techniques we discuss.
 
-### BDD Definitions used in this project
+##### BDD Definitions used in this project
 
 - Feature: In BDD terms, a feature is a piece of software functionality that helps users or other stakeholders achieve some business goal. A feature is not a user story, but it can be described by one or several user stories.
 
@@ -36,9 +36,40 @@ The language of choice for this project is `Typescript`. The following framework
 
 - Examples BDD practitioners use concrete examples to build up a shared understanding of how a feature should behave. These examples also help flush out and clarify ambiguities and uncertainties in the requirements
 
+##### BDD Features implemented in this project
+
+The following feature was implemented in this project:
+
+> Feature: Frequent Flyer status is calculated based on points
+> As a Frequent Flyer member
+> I want my status to be upgraded as soon as I earn enough points
+> So that I can benefit from my higher status sooner
+>
+> Scenario: New members should start out as BRONZE members
+> Given user is not a Frequent Flyer member
+> When user registers on the Frequent Flyer program
+> Then user should have a status of BRONZE
+>
+> Scenario Outline:
+> Given "Dinesh Go" is a "initialStatus" FrequentFlyer member
+> And "Dinesh Go" has "initialStatusPoints" status points
+> When he earns "extraPoints" extra status points
+> Then he should have a status of "finalStatus"
+>
+> Examples: Status points required for each level
+> | initialStatus | initialStatusPoints | extraPoints | finalStatus |
+> | Bronze | 0 | 300 | Silver |
+> | Bronze | 100 | 200 | Silver |
+> | Silver | 0 | 699 | Gold |
+> | Gold | 0 | 1500 | Platinum |
+
+This feature was copied from chapter 10 of the book BDD In Action.
+
+Notice for the last scenario a "examples" table is defined and it's used by cucumber when executing the BDD tests.
+
 ## How to use this project
 
-### Installation
+##### Installation
 
 This project requires NodeJs be installed on you computer.
 
@@ -46,7 +77,7 @@ This project requires NodeJs be installed on you computer.
 $ npm install
 ```
 
-### Running the app
+##### Running the app
 
 ```bash
 # development
@@ -59,14 +90,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-### Test
+##### Test
 
 ```bash
 # unit tests
 $ npm run test
 
+# BDD tests
+$ npm run bdd-tests
+
 # e2e tests
-$ npm run test:e2e
+$ npm run test:e2e -- NOT WORKING YET
 
 # test coverage
 $ npm run test:cov

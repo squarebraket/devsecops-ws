@@ -18,9 +18,46 @@ describe('Frequent Flyer Controller Tests', () => {
     const newMember = { lastName: 'Smith', firstName: 'Jill' };
     const res = ffController.joinClub(newMember);
 
-    expect(res.code).toBe('200');
+    expect(res.code).toBe(200);
     expect(res.message).toContain('Success');
   });
 
   it('Should retrieve Club Member', () => {});
+
+  it('should add points to user account', () => {
+    const id = 0;
+    const points = 100;
+    const res = ffController.addPointsToAccount({ id: id, pts: points });
+
+    expect(res.code).toBe(200);
+    expect(res.message).toContain('Success');
+  });
+
+  it('should update account status', () => {
+    const id = 0;
+    let status = 'Silver';
+    const newMember = { lastName: 'Smith', firstName: 'Jill' };
+
+    let res = ffController.joinClub(newMember);
+    expect(res.code).toBe(200);
+    expect(res.message).toContain('Success');
+
+    let m = ffController.findClubMember({ id });
+    expect(m.clubMember.status).toBe('Bronze');
+
+    res = ffController.updateAccountStatus({ id, status });
+    expect(res.code).toBe(200);
+    expect(res.message).toContain('Success');
+
+    m = ffController.findClubMember({ id });
+    expect(m.clubMember.status).toBe(status);
+
+    status = 'Gold';
+    res = ffController.updateAccountStatus({ id, status });
+    expect(res.code).toBe(200);
+    expect(res.message).toContain('Success');
+
+    m = ffController.findClubMember({ id });
+    expect(m.clubMember.status).toBe(status);
+  })
 });

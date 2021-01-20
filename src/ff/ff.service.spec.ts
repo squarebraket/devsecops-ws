@@ -42,4 +42,74 @@ describe('Should perform FF functions', () => {
 
     expect(s).toBe('Bronze');
   });
+
+  it('should add points to account', () => {
+    service.addToClub({ firstName: 'Jonny', lastName: 'Appleseed' });
+    const additionalPoints = 100;
+    const id = 0;
+
+    const m = service.getMemberDetails(id);
+    const p = m.points;
+
+    const r = service.addPointsToAccount(id, additionalPoints);
+
+    expect(r).toBe('ok');
+    expect(m.points).toBe(p + additionalPoints);
+  });
+
+  it('should change account status when more points are added', () => {
+    let additionalPoints = 100;
+    const id = 0;
+
+    service.addToClub({ firstName: 'Jonny', lastName: 'Appleseed' });
+
+    const m = service.getMemberDetails(id);
+    let p = m.points;
+    expect(m.status).toBe('Bronze');
+
+    let r = service.addPointsToAccount(id, additionalPoints);
+
+    expect(r).toBe('ok');
+    expect(m.points).toBe(p + additionalPoints);
+    expect(m.status).toBe('Bronze');
+
+    p = m.points;
+    additionalPoints += 100;
+    r = service.addPointsToAccount(id, additionalPoints);
+    expect(r).toBe('ok');
+    expect(m.points).toBe(p + additionalPoints);
+    expect(m.status).toBe('Silver');
+
+    p = m.points;
+    additionalPoints += 100;
+    r = service.addPointsToAccount(id, additionalPoints);
+    expect(r).toBe('ok');
+    expect(m.points).toBe(p + additionalPoints);
+    expect(m.status).toBe('Gold');
+
+    p = m.points;
+    additionalPoints += 100;
+    r = service.addPointsToAccount(id, additionalPoints);
+    expect(r).toBe('ok');
+    expect(m.points).toBe(p + additionalPoints);
+    expect(m.status).toBe('Platinum');
+  });
+
+  it('should set status for account', () => {
+    service.addToClub({ firstName: 'Jonny', lastName: 'Appleseed' });
+    const id = 0;
+    let status = 'Bronze';
+
+    let r = service.setMemberStatus(id, status);
+    let m = service.getMemberDetails(id);
+    expect(r).toBe('ok');
+    expect(m.status).toBe(status);
+
+    status = 'Silver';
+    r = service.setMemberStatus(id, status);
+    m = service.getMemberDetails(id);
+    expect(r).toBe('ok');
+    expect(m.status).toBe(status);
+
+  });
 });
