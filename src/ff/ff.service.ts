@@ -1,10 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { FrequentFlyerDtoInterface } from '../interface/frequent-flyer-dto-interface';
 import { FrequentFlyerModel } from '../model/frequent-flyer-model';
+import { MemberRepository } from '../common/repos/member';
 
 @Injectable()
 export class FrequentFlyerService {
   private clubMembers: Array<FrequentFlyerModel> = [];
+  memberRepo: MemberRepository;
+
+  constructor(memberRepo: MemberRepository) {
+    this.memberRepo = memberRepo;
+  }
 
   addToClub(newMemberDto: FrequentFlyerDtoInterface): number {
     const newMember = new FrequentFlyerModel(
@@ -22,6 +28,11 @@ export class FrequentFlyerService {
       return -1;
     }
 
+    try {
+      this.memberRepo.registerNewMember(newMember);
+    } catch (e) {
+      console.log('There was an error adding a new member =>', e);
+    }
     // return member id (position in Arry at this point, shoudl be changed)
     return this.clubMembers.length - 1;
   }

@@ -1,0 +1,7 @@
+liquibase \
+--driver=org.postgresql.Driver \
+--url=jdbc:postgresql://localhost:5432/postgres \
+--changeLogFile=/Users/pedroplopez/Developer/lopez/devsecops-bdd-ws/src/common/config/liquidbase-change-log.sql \
+--username=postgres \
+--password=postgres \
+update
