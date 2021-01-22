@@ -12,13 +12,17 @@ export class FrequentFlyerController {
     const m = this.ffService.getMemberDetails(params.id);
 
     if (m.status !== '') {
-      const res = new ResponseDto(
+      return new ResponseDto(
         200,
         `Success! Found club member with id =${params.id}`,
         m,
       );
-
-      return res;
+    } else {
+      return new ResponseDto(
+        400,
+        `Club member with id =${params.id}, not found`,
+        null,
+      );
     }
   }
 

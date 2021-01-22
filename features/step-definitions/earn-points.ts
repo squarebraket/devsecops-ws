@@ -6,14 +6,22 @@ import { ResponseDto } from '../../src/dto/response-dto';
 
 import { Before, Given, When, Then } from '@cucumber/cucumber';
 import { strict as assert } from 'assert';
+import { FrequentFlyerModelInterface } from '../../src/interface/frequent-flyer-model-interface';
+
 
 let ffController: FrequentFlyerController;
 const memberId = 0;
 
 Before(async () => {
+  class MemberRepository {
+    registerNewMember(member: FrequentFlyerModelInterface) {
+      return Promise.resolve({ code: 200 });
+    }
+  }
+
   const ff: TestingModule = await Test.createTestingModule({
     controllers: [FrequentFlyerController],
-    providers: [FrequentFlyerService],
+    providers: [FrequentFlyerService, MemberRepository],
   }).compile();
 
   ffController = ff.get<FrequentFlyerController>(FrequentFlyerController);

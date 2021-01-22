@@ -8,20 +8,4 @@ const poolConfig = {
   database: 'postgres',
   port: 5432,
 };
-export const pool =  new Pool(poolConfig);
-
-// import pgPromise from 'pg-promise'; // pg-promise core library
-// import { IMain } from 'pg-promise';
-//
-//
-// const dbConfig = {
-//   user: 'postgres',
-//   password: 'postgres',
-//   host: 'localhost',
-//   database: 'postgres',
-//   port: 5432,
-// };
-//
-// const pgp: IMain = pgPromise({});
-// const db = pgp(dbConfig);
-//
+export const pool = new Pool(poolConfig);

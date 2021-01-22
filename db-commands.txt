@@ -5,3 +5,16 @@ liquibase \
 --username=postgres \
 --password=postgres \
 update
+
+
+#
+# run command
+#
+docker run --rm --name postgresql \
+-e POSTGRES_USERNAME=postgres \
+-e POSTGRES_PASSWORD=postgres \
+-e POSTGRES_DATABASE=wolfdb \
+-v volumes:/var/lib/postgresql/data \
+-p 5432:5432 \
+--network postgres-network \
+postgres:10.12-alpine

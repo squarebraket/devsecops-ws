@@ -1,14 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FrequentFlyerController } from './ff.controller';
 import { FrequentFlyerService } from './ff.service';
+import { MemberRepository } from '../common/repos/member';
 
 describe('Frequent Flyer Controller Tests', () => {
   let ffController: FrequentFlyerController;
 
+  jest.mock('../common/repos/member');
+  const registerNewMember = jest.fn();
+  registerNewMember.mockReturnValue(Promise.resolve({ code: 200}));
+  MemberRepository.prototype.registerNewMember = registerNewMember;
+
   beforeEach(async () => {
     const ff: TestingModule = await Test.createTestingModule({
       controllers: [FrequentFlyerController],
-      providers: [FrequentFlyerService],
+      providers: [FrequentFlyerService, MemberRepository],
     }).compile();
 
     ffController = ff.get<FrequentFlyerController>(FrequentFlyerController);

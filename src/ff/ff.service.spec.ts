@@ -1,10 +1,17 @@
 import { FrequentFlyerService } from './ff.service';
+import { MemberRepository } from '../common/repos/member';
 
 describe('Should perform FF functions', () => {
   let service: FrequentFlyerService;
+  let repo: MemberRepository;
 
   beforeEach(() => {
-    service = new FrequentFlyerService();
+    repo = new MemberRepository();
+    service = new FrequentFlyerService(repo);
+
+    jest.spyOn(repo, 'registerNewMember').mockImplementation(() => {
+      return Promise.resolve({ code: 200 });
+    });
   });
 
   it('Should register a new member', () => {
@@ -110,6 +117,5 @@ describe('Should perform FF functions', () => {
     m = service.getMemberDetails(id);
     expect(r).toBe('ok');
     expect(m.status).toBe(status);
-
   });
 });

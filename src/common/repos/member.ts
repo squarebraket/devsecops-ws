@@ -14,7 +14,6 @@ export class MemberRepository {
     };
 
     try {
-
       const res = await pool.query(query);
 
       return res;
