@@ -113,4 +113,4 @@ $ npm run test:cov
 ```
 
 ## Things to Improve
-Currently all BDD test use NodeJs's ```assert``` module for assertions therefore, when writting code the syntax for BDD tests is different than unit-tests. It will be good to find a way to use ```jest``` just like it's being used for unit-tests so that, the syntax is the same no matter which part of the code the developer is working on.
+Currently all BDD test use NodeJs's [assert](https://nodejs.org/dist/latest-v14.x/docs/api/assert.html) module for assertions therefore, when writting code the syntax for BDD tests is different than unit-tests. It will be good to find a way to use [jest](https://jestjs.io/en/) just like it's being used for unit-tests so that, the syntax is the same no matter which part of the code the developer is working on.
