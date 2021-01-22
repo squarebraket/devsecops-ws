@@ -57,15 +57,21 @@ The following feature was implemented in this project:
 > Then he should have a status of "finalStatus"
 >
 > Examples: Status points required for each level
+> 
 > | initialStatus | initialStatusPoints | extraPoints | finalStatus |
+> 
 > | Bronze | 0 | 300 | Silver |
+> 
 > | Bronze | 100 | 200 | Silver |
+> 
 > | Silver | 0 | 699 | Gold |
+> 
 > | Gold | 0 | 1500 | Platinum |
+> 
 
 This feature was copied from chapter 10 of the book BDD In Action.
 
-Notice for the last scenario a "examples" table is defined and it's used by cucumber when executing the BDD tests.
+Notice that for the last scenario an "examples" table is defined. This table is used by cucumber when executing BDD tests.
 
 ## How to use this project
 
@@ -105,3 +111,6 @@ $ npm run test:e2e -- NOT WORKING YET
 # test coverage
 $ npm run test:cov
 ```
+
+## Things to Improve
+Currently all BDD test use NodeJs's ```assert``` module for assertions therefore, when writting code the syntax for BDD tests is different than unit-tests. It will be good to find a way to use ```jest``` just like it's being used for unit-tests so that, the syntax is the same no matter which part of the code the developer is working on.
