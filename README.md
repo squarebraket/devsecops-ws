@@ -1,4 +1,4 @@
-# DevSecOps Frequent Flyer REST Microservice
+# DevSecOps Frequent Flyer REST Microservice 
 
 ## Description
 
@@ -6,21 +6,22 @@ The goal of this project is to demostrate how TDD and BDD can be used to test ap
 
 The project's code has a set of unit-tests, BBD tests and integration test that can be executed on demand or as part a CI/CD pipeline.
 
-### Tech Stack
+
+## Dependencies
 
 The language of choice for this project is `Typescript`. The following frameworks and tools were used to create this project:
 
+- NodeJs > 10.x
 - NestJs: A framework to build Node.js server-side applications
 - Jest: A test framework for unit-test and e2e tests
 - Cucumber: a tool to create and run BBD tests
 
-##### Code Structure
+## Change Log
+| Version | Notes|
+|---------|------|
+|1.0.0| Initial release |
 
-- Source code and unit-tests are located in the `src` folder
-- e2e tests are stored in the `test` folder
-- BDD features and step definitions are located in the `features` folder
-
-### Business Case used to in this project
+### Business Case used for this project
 
 > Flying High Airlines is a large commercial airline that runs both international and domestic flights. Flying High has been under pressure due to increasing costs and com- petition from low-cost carriers, so management has recently launched a new and improved version of their Frequent Flyer program to try to retain existing customers and attract new ones. This new program will offer many compelling reasons to join; like all Frequent Flyer programs, members will accumulate points when they fly, but members will also benefit from many exclusive privileges, such as access to lounges and faster boarding lines, and they’ll be able to easily spend their accumulated miles on flights and on other purchases for themselves or their family members.
 >
@@ -28,7 +29,7 @@ The language of choice for this project is `Typescript`. The following framework
 >
 > In this chapter, and throughout the rest of the book, we’ll use examples from this project to illustrate the concepts and techniques we discuss.
 
-##### BDD Definitions used in this project
+##### BDD Definitions
 
 - Feature: In BDD terms, a feature is a piece of software functionality that helps users or other stakeholders achieve some business goal. A feature is not a user story, but it can be described by one or several user stories.
 
@@ -36,9 +37,9 @@ The language of choice for this project is `Typescript`. The following framework
 
 - Examples BDD practitioners use concrete examples to build up a shared understanding of how a feature should behave. These examples also help flush out and clarify ambiguities and uncertainties in the requirements
 
-##### BDD Features implemented in this project
+##### BDD Features
 
-The following feature was implemented in this project:
+The following two features were implemented in this project:
 
 > Feature: Frequent Flyer status is calculated based on points
 > As a Frequent Flyer member
@@ -71,13 +72,19 @@ The following feature was implemented in this project:
 
 This feature was copied from chapter 10 of the book BDD In Action.
 
-Notice that for the last scenario an "examples" table is defined. This table is used by cucumber when executing BDD tests.
+Notice that for the last scenario an "examples" table is defined. This table is used by cucumber as scenarios to use to run the BDD tests with
 
-## How to use this project
+## Code Structure
+
+- Source code and unit-tests are located in the `src` folder
+- e2e tests are stored in the `test` folder
+- BDD features and step definitions are located in the `features` folder
+
+## Project Instructions
 
 ##### Installation
 
-This project requires NodeJs be installed on you computer.
+This project requires NodeJs be installed on you computer. You can install all dependencies using the command below:
 
 ```bash
 $ npm install
@@ -111,6 +118,10 @@ $ npm run test:e2e -- NOT WORKING YET
 # test coverage
 $ npm run test:cov
 ```
+## Comments
+### BDD using JestJs
+Cucumber is the library used in the project to run BDD test. However there is an alternative called [Jest-Cucumber](https://github.com/bencompton/jest-cucumber) which allows the developer to use the JestJs testing library to run all BDD tests.
 
-## Things to Improve
-Currently all BDD test use NodeJs's [assert](https://nodejs.org/dist/latest-v14.x/docs/api/assert.html) module for assertions therefore, when writting code the syntax for BDD tests is different than unit-tests. It will be good to find a way to use [jest](https://jestjs.io/en/) just like it's being used for unit-tests so that, the syntax is the same no matter which part of the code the developer is working on.
+An example of Jest-Cucumber was created to show how to use it. The example is located in the `src/features` folder. This folder contains two files `earn-points-jest.steps.ts` and `new-club-member-registration-stand-alone.feature`
+
+This example test is run when the `npm test` command is invoked, it runs along side all unit-tests. 

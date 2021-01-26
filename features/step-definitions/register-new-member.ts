@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FrequentFlyerController } from '../../src/ff/ff.controller';
-import { FrequentFlyerService } from '../../src/ff/ff.service';
-
 import { Before, Given, When, Then } from '@cucumber/cucumber';
 import { strict as assert } from 'assert';
+
+import { FrequentFlyerController } from '../../src/ff/ff.controller';
+import { FrequentFlyerService } from '../../src/ff/ff.service';
 import { FrequentFlyerModelInterface } from '../../src/interface/frequent-flyer-model-interface';
-import { FrequentFlyerDto } from "../../src/dto/frequent-flyer-dto";
-import { ResponseDto } from "../../src/dto/response-dto";
+import { FrequentFlyerDto } from '../../src/dto/frequent-flyer-dto';
+import { ResponseDto } from '../../src/dto/response-dto';
 
 let ffController: FrequentFlyerController;
 
